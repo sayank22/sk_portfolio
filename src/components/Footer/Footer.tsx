@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="bg-[#2b2b2b] px-4 py-12 lg:px-60 mt-40 flex flex-col md:flex-row items-center justify-between gap-6 text-white text-center md:text-left">
       {/* Website Logo/Link */}
       <a href="https://sayan-kundu-portfolio.netlify.app" className="text-sky-400 text-3xl font-semibold">
-        <span>www.sayan-kundu</span>
+        <span>sayan-kundu-</span>
         <span>portfolio.netlify.app</span>
       </a>
 

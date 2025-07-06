@@ -1,5 +1,4 @@
-import React from "react";
-import ScrollAnimation from "react-animate-on-scroll";
+
 
 import python from "../../assets/python.svg";
 import java from "../../assets/java.svg";
@@ -32,7 +31,12 @@ import postman from "../../assets/postman.svg";
 import expressjs from "../../assets/expressjs.png";
 import render from "../../assets/render.jpg";
 
-// ------------------- Types -------------------
+import React from "react";
+import { motion } from "framer-motion";
+
+// Import all icons as you already did
+// ...
+
 interface Skill {
   name: string;
   icon: string;
@@ -44,22 +48,30 @@ interface SkillBoxProps {
   color: "blue" | "green" | "yellow";
 }
 
-// ------------------ SkillBox -------------------
-const SkillBox: React.FC<SkillBoxProps> = ({ title, skills, color }) => (
-  <div className={`rounded-2xl p-6 bg-teal-500 shadow hover:bg-red-400 transition-all w-full`}>
-    <h4 className={`text-4xl font-bold text-blue-700 mb-4 text-center`}>{title}</h4>
+const fadeIn = (delay = 0) => ({
+  initial: { opacity: 0, y: 40 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay },
+  viewport: { once: true },
+});
+
+const SkillBox: React.FC<SkillBoxProps> = ({ title, skills }) => (
+  <motion.div
+    className="rounded-2xl p-6 bg-teal-500 shadow hover:bg-red-400 transition-all w-full"
+    {...fadeIn(0.2)}
+  >
+    <h4 className="text-4xl font-bold text-blue-700 mb-4 text-center">{title}</h4>
     <div className="flex flex-wrap justify-center gap-4">
-      {skills.map((skill: Skill, i: number) => (
+      {skills.map((skill, i) => (
         <div key={i} className="flex flex-col items-center text-sm">
-          <img src={skill.icon} alt={skill.name} className="w-10 h-10 mb-8" />
+          <img src={skill.icon} alt={skill.name} className="w-10 h-10 mb-4" />
           <span className="text-gray-100 text-xl text-center whitespace-nowrap">{skill.name}</span>
         </div>
       ))}
     </div>
-  </div>
+  </motion.div>
 );
 
-// ------------------ Main Component -------------------
 export function About() {
   const frontendSkills: Skill[] = [
     { name: "HTML", icon: htmlIcon },
@@ -102,45 +114,40 @@ export function About() {
 
   return (
     <div id="about" className="px-4 py-16 lg:px-20 bg-[#111827] text-white">
-  <div className="flex flex-col lg:flex-row items-start gap-8">
-    <div className="w-full">
-      <ScrollAnimation animateIn="fadeInLeft">
-        <h2 className="text-4xl font-bold text-sky-400 mb-6 border-b-2 border-sky-600 inline-block pb-2">
-          About Me
-        </h2>
-      </ScrollAnimation>
+      <div className="flex flex-col lg:flex-row items-start gap-8">
+        <div className="w-full">
+          <motion.h2 className="text-4xl font-bold text-sky-400 mb-6 border-b-2 border-sky-600 inline-block pb-2" {...fadeIn()}>
+            About Me
+          </motion.h2>
 
-      <ScrollAnimation animateIn="fadeInLeft" delay={100}>
-        <p className="text-2xl leading-relaxed text-gray-300 mb-6">
-          Hi there! I'm <span className="font-semibold text-white">Sayan</span>, a passionate Software Engineer skilled in web development and scalable software solutions.
-        </p>
-      </ScrollAnimation>
+          <motion.p className="text-2xl leading-relaxed text-gray-300 mb-6" {...fadeIn(0.1)}>
+            Hi there! I'm <span className="font-semibold text-white">Sayan</span>, a passionate Software Engineer skilled in web development and scalable software solutions.
+          </motion.p>
 
-      <ScrollAnimation animateIn="fadeInLeft" delay={200}>
-        <p className="text-2xl leading-relaxed text-gray-300 mb-6">
-          I build responsive web applications, design interactive user interfaces with intuitive UX, and implement robust backend services.
-        </p>
-      </ScrollAnimation>
+          <motion.p className="text-2xl leading-relaxed text-gray-300 mb-6" {...fadeIn(0.2)}>
+            I build responsive web applications, design interactive user interfaces with intuitive UX, and implement robust backend services.
+          </motion.p>
 
-      <ScrollAnimation animateIn="fadeInLeft" delay={300}>
-        <div className="bg-[#1f2937] border border-sky-700 rounded-lg p-6 shadow-md mt-4">
-          <h3 className="text-2xl font-semibold text-sky-400 mb-2">Education</h3>
-          <h4 className="text-xl font-medium text-teal-300 mb-1">B.Tech in Computer Science</h4>
-          <p className="text-gray-400">Netaji Subhash Engineering College, Kolkata | 2021 - 2025</p>
+          <motion.div
+            className="bg-[#1f2937] border border-sky-700 rounded-lg p-6 shadow-md mt-4"
+            {...fadeIn(0.3)}
+          >
+            <h3 className="text-2xl font-semibold text-sky-400 mb-2">Education</h3>
+            <h4 className="text-xl font-medium text-teal-300 mb-1">B.Tech in Computer Science</h4>
+            <p className="text-gray-400">Netaji Subhash Engineering College, Kolkata | 2021 - 2025</p>
+          </motion.div>
         </div>
-      </ScrollAnimation>
-    </div>
-  </div>
+      </div>
 
-  {/* Skills Section */}
-  <ScrollAnimation animateIn="fadeInLeft" delay={400}>
-    <h3 className="text-sky-400 mt-10 mb-2">Here are some of the skills I've worked with:</h3>
-  </ScrollAnimation>
-  <div className="flex flex-col lg:flex-row gap-4 mt-4">
-    <SkillBox title="Frontend" skills={frontendSkills} color="blue" />
-    <SkillBox title="Backend" skills={backendSkills} color="green" />
-    <SkillBox title="Tools & Platforms" skills={toolsSkills} color="yellow" />
-  </div>
-</div>
+      {/* Skills */}
+      <motion.h3 className="text-xl text-sky- mb-2" {...fadeIn(0.4)}>
+        Here are some of the skills I've worked with:
+      </motion.h3>
+      <div className="flex flex-col lg:flex-row gap-4 mt-4">
+        <SkillBox title="Frontend" skills={frontendSkills} color="blue" />
+        <SkillBox title="Backend" skills={backendSkills} color="green" />
+        <SkillBox title="Tools & Platforms" skills={toolsSkills} color="yellow" />
+      </div>
+    </div>
   );
 }

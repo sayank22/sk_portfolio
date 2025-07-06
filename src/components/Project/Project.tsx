@@ -1,6 +1,6 @@
 import githubIcon from "../../assets/github.svg";
 import externalLink from "../../assets/external-link.svg";
-import ScrollAnimation from "react-animate-on-scroll";
+import { motion } from "framer-motion";
 
 // New: Add local images (or URLs) for each project
 import jivakaImg from "../../assets/jivaka.png";
@@ -9,52 +9,62 @@ import dropboxImg from "../../assets/dropbox.png";
 import snapshowImg from "../../assets/snapshows.png";
 import silentPostImg from "../../assets/silentpost.png";
 
+const flipInX = {
+  initial: { rotateY: 90, opacity: 0 },
+  whileInView: { rotateY: 0, opacity: 1 },
+  transition: { duration: 0.6 },
+};
+
 export function Project() {
   return (
     <section id="project" className="mt-60 px-4">
       <h2 className="text-4xl text-center mb-12 text-sky-400 font-bold">My Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
-          <ScrollAnimation animateIn="flipInX" key={index}>
-            <div className="bg-[#1f1f1f] text-white rounded-xl p-4 flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:bg-[#0f172a] shadow-lg">
-              
-              {/* Image */}
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-700"
-              />
+          <motion.div
+  key={index}
+  className="bg-[#1f1f1f] text-white rounded-xl p-4 flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:bg-[#0f172a] shadow-lg"
+  initial={flipInX.initial}
+  whileInView={flipInX.whileInView}
+  transition={flipInX.transition}
+  viewport={{ once: true }}
+>
+  {/* Image */}
+  <img
+    src={project.image}
+    alt={project.title}
+    className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-700"
+  />
 
-              {/* Header Links */}
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-sky-400">{project.title}</h3>
-                <div className="flex gap-3">
-                  {project.links.map((link, i) => (
-                    <a key={i} href={link.href} target="_blank" rel="noreferrer">
-                      <img src={link.icon} alt="link-icon" className="w-6" />
-                    </a>
-                  ))}
-                </div>
-              </div>
+  {/* Header Links */}
+  <div className="flex justify-between items-center mb-4">
+    <h3 className="text-lg font-semibold text-sky-400">{project.title}</h3>
+    <div className="flex gap-3">
+      {project.links.map((link, i) => (
+        <a key={i} href={link.href} target="_blank" rel="noreferrer">
+          <img src={link.icon} alt="link-icon" className="w-6" />
+        </a>
+      ))}
+    </div>
+  </div>
 
-              {/* Description */}
-              <p className="text-white/90 text-sm leading-relaxed mb-4">{project.description}</p>
+  {/* Description */}
+  <p className="text-white/90 text-sm leading-relaxed mb-4">{project.description}</p>
 
-              {/* Tech List */}
-              <footer className="mt-auto">
-                <ul className="flex flex-wrap gap-2 text-xs">
-                  {project.tech.map((t, i) => (
-                    <li
-                      key={i}
-                      className="bg-sky-950 text-sky-300 px-2 py-1 rounded-full tracking-wide"
-                    >
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </footer>
-            </div>
-          </ScrollAnimation>
+  {/* Tech List */}
+  <footer className="mt-auto">
+    <ul className="flex flex-wrap gap-2 text-xs">
+      {project.tech.map((t, i) => (
+        <li
+          key={i}
+          className="bg-sky-950 text-sky-300 px-2 py-1 rounded-full tracking-wide"
+        >
+          {t}
+        </li>
+      ))}
+    </ul>
+  </footer>
+</motion.div>
         ))}
       </div>
     </section>
