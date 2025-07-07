@@ -2,7 +2,6 @@ import { Container } from './styles'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { NavHashLink, HashLink } from 'react-router-hash-link'
 import { useState } from 'react'
-import Resume from '../../assets/Vinayak_Singh_Resume.pdf'
 export function Header() {
   const [isActive, setActive] = useState(false)
   function toggleTheme() {
@@ -40,9 +39,14 @@ export function Header() {
           <NavHashLink smooth to="#contact" onClick={closeMenu}>
             Contact
           </NavHashLink>
-          <a href={Resume} download className="button">
-            Resume
-          </a>
+          <a
+  href="https://drive.google.com/file/d/1Mhn6U396WW0DiciBdBbsP2eJP5P9CSg4/view?usp=drive_link"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="button"
+>
+  Resume
+</a>
         </nav>
         <div
           aria-expanded={isActive ? 'true' : 'false'}

@@ -140,7 +140,7 @@ export function About() {
       </div>
 
       {/* Skills */}
-      <motion.h3 className="text-xl text-sky- mb-2" {...fadeIn(0.4)}>
+      <motion.h3 className="text-xl text-sky-400 mt-10 mb-2" {...fadeIn(0.4)}>
         Here are some of the skills I've worked with:
       </motion.h3>
       <div className="flex flex-col lg:flex-row gap-4 mt-4">
