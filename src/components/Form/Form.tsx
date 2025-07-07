@@ -1,6 +1,5 @@
 import { useForm, ValidationError } from "@formspree/react";
 import { toast, ToastContainer } from "react-toastify";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useEffect, useState } from "react";
 import validator from "validator";
 
@@ -73,11 +72,6 @@ export function Form() {
           name="message"
           onChange={(e) => setMessage(e.target.value)}
           className="p-4 rounded-xl h-52 resize-none bg-transparent border border-white placeholder-white text-white font-semibold focus:outline-none"
-        />
-        <ValidationError prefix="Message" field="message" errors={state.errors} />
-        <ReCAPTCHA
-          sitekey="6Lfj9NYfAAAAAP8wPLtzrsSZeACIcGgwuEIRvbSg"
-          onChange={() => setIsHuman(true)}
         />
         <button
           type="submit"
