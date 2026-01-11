@@ -116,17 +116,18 @@ const Experience = () => {
                     <h3 className="text-2xl font-semibold text-white">
                       {exp.company}
                     </h3>
-                    <p className="text-sm text-sky-400">
+                    <p className="text-lg text-sky-400">
                       {exp.role}
-                    </p>
-                    <span className="text-xs text-gray-400">
+                    
+                    <span className="ml-2 text-sm text-gray-400">
                       {exp.duration}
                     </span>
+                    </p>
                   </div>
                 </div>
 
                 {/* Description */}
-                <ul className="mt-6 space-y-3 text-gray-300 text-sm leading-relaxed">
+                <ul className="mt-6 space-y-3 text-gray-300 text-xl leading-relaxed">
                   {exp.description.map((item, i) => (
                     <li key={i} className="flex gap-3">
                       <span className="mt-2 w-2 h-2 rounded-full bg-sky-400 flex-shrink-0" />

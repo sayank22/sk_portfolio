@@ -4,6 +4,7 @@ import externalLink from "../../assets/external-link.svg";
 import { motion } from "framer-motion";
 
 // Project images
+import CodeGeneratorImg from "../../assets/CodeGenerator.png";
 import jivakaImg from "../../assets/jivaka.png";
 import budgetImg from "../../assets/budgetbuddy.png";
 import dropboxImg from "../../assets/dropbox.png";
@@ -135,6 +136,17 @@ export function Project() {
 /* ================= DATA ================= */
 
 const projects = [
+  {
+    title: "AI Testcase Generator",
+    description:
+      "An AI-powered Test Case Generator that integrates with GitHub to list code files, generate test case summaries. Produce executable test scripts like JUnit, Selenium etc. from selected files and GitHub pull request creation with the generated code.",
+    tech: ["Gemini API", "GitHub API(Ocktokit)", "Rest API", "Jest", "React", "Node", "Express", "Tailwind",],
+    image: CodeGeneratorImg,
+    links: [
+      { href: "https://github.com/sayank22/testcase-generator", icon: githubIcon },
+      { href: "https://testcase-generator-sayan-kundu.vercel.app", icon: externalLink },
+    ],
+  },
   {
     title: "Jivaka: Role Based HealthCare Management System",
     description:

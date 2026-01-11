@@ -1,12 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
 import { NavHashLink } from "react-router-hash-link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 import linkedin from "../../assets/linkedin.svg";
 import githubIcon from "../../assets/github.svg";
 import Hello from "../../assets/Hello.gif";
 import sayankundu from "../../assets/sayankundu.jpg";
 
+/* =======================
+   Animations
+======================= */
 const fadeInUp = (delay = 0) => ({
   initial: { opacity: 0, y: 40 },
   animate: { opacity: 1, y: 0 },
@@ -19,7 +23,31 @@ const fadeInRight = (delay = 0) => ({
   transition: { delay, duration: 0.6 },
 });
 
+/* =======================
+   Roles
+======================= */
+const roles = [
+  "Full Stack Developer",
+  "Frontend Developer",
+  "Backend Developer",
+  "Software Developer",
+  "Programmer",
+];
+
+/* =======================
+   Component
+======================= */
 export function Hero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => (prev + 1) % roles.length);
+    }, 2200);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="home"
@@ -28,66 +56,70 @@ export function Hero() {
       {/* Left Text Section */}
       <div className="text-white flex-1 text-center lg:text-left">
         <motion.p className="text-3xl mb-2 text-teal-500" {...fadeInUp()}>
-          Hello <img src={Hello} alt="Hello" className="inline w-5" /> I'm
+          Hello <img src={Hello} alt="Hello" className="inline w-6 ml-1" /> I'm
         </motion.p>
 
-        <motion.h1 className="text-5xl md:text-6xl font-bold text-sky-400" {...fadeInUp(0.2)}>
+        <motion.h1
+          className="text-5xl md:text-6xl font-bold text-sky-400"
+          {...fadeInUp(0.2)}
+        >
           Sayan Kundu
         </motion.h1>
 
-        <motion.h3
-          className="text-3xl font-semibold text-teal-500 mt-4 mb-6"
-          {...fadeInUp(0.4)}
-        >
-          Full Stack Developer
-        </motion.h3>
-
-        <motion.div {...fadeInUp(0.8)}>
-          <BrowserRouter>
-            <NavHashLink
-              smooth
-              to="#contact"
-              className="inline-block bg-sky-500 text-white px-12 py-6 rounded-md text-2xl font-medium hover:bg-sky-600 transition"
+        {/* Rotating Title */}
+        <div className="relative h-10 overflow-hidden mt-4 mb-6">
+          <AnimatePresence mode="wait">
+            <motion.h3
+              key={roles[index]}
+              className="absolute w-full text-4xl font-semibold text-teal-500 text-center lg:text-left"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              Contact
-            </NavHashLink>
-          </BrowserRouter>
-        </motion.div>
+              {roles[index]}
+            </motion.h3>
+          </AnimatePresence>
+        </div>
 
+        {/* Social Links */}
         <motion.div
           className="flex justify-center lg:justify-start gap-6 mt-10"
-          {...fadeInUp(1)}
+          {...fadeInUp(0.8)}
         >
-          <a
-            href="https://www.linkedin.com/in/sayan-kundu-70b5442b6"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img src={linkedin} alt="LinkedIn" className="w-14 h-14" />
-          </a>
           <a
             href="https://github.com/sayank22"
             target="_blank"
             rel="noreferrer"
+            className="inline-block bg-sky-500 p-1 rounded-md hover:bg-sky-600 transition"
           >
-            <img src={githubIcon} alt="GitHub" className="w-14 h-14" />
+            <img src={githubIcon} alt="GitHub" className="w-12 h-12" />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/sayan-kundu-70b5442b6"
+            target="_blank"
+            rel="noreferrer"
+            className="transition-transform hover:scale-110"
+          >
+            <img src={linkedin} alt="LinkedIn" className="w-14 h-14" />
           </a>
         </motion.div>
       </div>
 
       {/* Right Image Section */}
-      <motion.div className="flex-1 flex justify-center" {...fadeInRight(1)}>
+      <motion.div className="flex-1 flex justify-center" {...fadeInRight(0.6)}>
         <img
           src={sayankundu}
-          alt="sayankundu"
+          alt="Sayan Kundu"
           className="
             w-[300px] h-[300px]
-            sm:w-[300px] sm:h-[300px]
-            md:w-[300px] md:h-[300px]
             lg:w-[400px] lg:h-[400px]
             xl:w-[500px] xl:h-[500px]
-            rounded-full object-cover border-8 border-teal-400 shadow-xl
-            transition-all duration-500 ease-in-out
+            rounded-full object-cover
+            border-8 border-teal-400
+            shadow-xl
+            transition-all duration-500
             hover:scale-105 hover:shadow-2xl hover:border-sky-400
           "
         />
