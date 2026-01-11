@@ -1,5 +1,3 @@
-import { BrowserRouter } from "react-router-dom";
-import { NavHashLink } from "react-router-hash-link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
