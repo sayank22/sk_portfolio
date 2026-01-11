@@ -27,11 +27,11 @@ export function Hero() {
     >
       {/* Left Text Section */}
       <div className="text-white flex-1 text-center lg:text-left">
-        <motion.p className="text-3xl mb-2" {...fadeInUp()}>
+        <motion.p className="text-3xl mb-2 text-teal-500" {...fadeInUp()}>
           Hello <img src={Hello} alt="Hello" className="inline w-5" /> I'm
         </motion.p>
 
-        <motion.h1 className="text-5xl md:text-6xl font-bold" {...fadeInUp(0.2)}>
+        <motion.h1 className="text-5xl md:text-6xl font-bold text-sky-400" {...fadeInUp(0.2)}>
           Sayan Kundu
         </motion.h1>
 

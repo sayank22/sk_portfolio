@@ -1,8 +1,9 @@
+import { useState } from "react";
 import githubIcon from "../../assets/github.svg";
 import externalLink from "../../assets/external-link.svg";
 import { motion } from "framer-motion";
 
-// New: Add local images (or URLs) for each project
+// Project images
 import jivakaImg from "../../assets/jivaka.png";
 import budgetImg from "../../assets/budgetbuddy.png";
 import dropboxImg from "../../assets/dropbox.png";
@@ -16,62 +17,123 @@ const flipInX = {
 };
 
 export function Project() {
+  const [activeProject, setActiveProject] = useState<any | null>(null);
+
   return (
     <section id="project" className="mt-60 px-4">
-      <h2 className="text-4xl text-center mb-12 text-sky-400 font-bold">My Projects</h2>
+      <h2 className="text-4xl text-center mb-12 text-sky-400 font-bold">
+        My Projects
+      </h2>
+
+      {/* Project Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <motion.div
-  key={index}
-  className="bg-[#1f1f1f] text-white rounded-xl p-4 flex flex-col transition-transform duration-300 hover:-translate-y-1 hover:bg-[#0f172a] shadow-lg"
-  initial={flipInX.initial}
-  whileInView={flipInX.whileInView}
-  transition={flipInX.transition}
-  viewport={{ once: true }}
->
-  {/* Image */}
-  <img
-    src={project.image}
-    alt={project.title}
-    className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-700"
-  />
+            key={index}
+            onClick={() => setActiveProject(project)}
+            className="cursor-pointer bg-[#1f1f1f] text-white rounded-xl p-4 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:bg-[#0f172a] shadow-lg"
+            initial={flipInX.initial}
+            whileInView={flipInX.whileInView}
+            transition={flipInX.transition}
+            viewport={{ once: true }}
+          >
+            {/* Image */}
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-48 object-cover rounded-lg mb-4 border border-gray-700"
+            />
 
-  {/* Header Links */}
-  <div className="flex justify-between items-center mb-4">
-    <h3 className="text-lg font-semibold text-sky-400">{project.title}</h3>
-    <div className="flex gap-3">
-      {project.links.map((link, i) => (
-        <a key={i} href={link.href} target="_blank" rel="noreferrer">
-          <img src={link.icon} alt="link-icon" className="w-6" />
-        </a>
-      ))}
-    </div>
-  </div>
+            {/* Title */}
+            <h3 className="text-lg font-semibold text-sky-400 mb-2">
+              {project.title}
+            </h3>
 
-  {/* Description */}
-  <p className="text-white/90 text-sm leading-relaxed mb-4">{project.description}</p>
+            {/* Short Description */}
+            <p className="text-white/80 text-sm line-clamp-3">
+              {project.description}
+            </p>
 
-  {/* Tech List */}
-  <footer className="mt-auto">
-    <ul className="flex flex-wrap gap-2 text-xs">
-      {project.tech.map((t, i) => (
-        <li
-          key={i}
-          className="bg-sky-950 text-sky-300 px-2 py-1 rounded-full tracking-wide"
-        >
-          {t}
-        </li>
-      ))}
-    </ul>
-  </footer>
-</motion.div>
+            {/* Tech */}
+            <footer className="mt-4">
+              <ul className="flex flex-wrap gap-2 text-xs">
+                {project.tech.map((t, i) => (
+                  <li
+                    key={i}
+                    className="bg-sky-950 text-sky-300 px-2 py-1 rounded-full"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </footer>
+          </motion.div>
         ))}
       </div>
+
+      {/* ================= MODAL ================= */}
+      {activeProject && (
+        <motion.div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          onClick={() => setActiveProject(null)}
+        >
+          <motion.div
+            className="bg-[#0f172a] max-w-md w-full rounded-xl p-6 text-white relative"
+            initial={{ scale: 0.85, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}
+          >
+            {/* Close button */}
+            <button
+              onClick={() => setActiveProject(null)}
+              className="absolute top-3 right-3 text-white/60 hover:text-white"
+            >
+              ✕
+            </button>
+
+            {/* Title */}
+            <h3 className="text-2xl font-bold text-sky-400 mb-4">
+              {activeProject.title}
+            </h3>
+
+            {/* Description */}
+            <p className="text-white/90 mb-6 leading-relaxed">
+              {activeProject.description}
+            </p>
+
+            {/* Actions */}
+            <div className="flex gap-4">
+              <a
+                href={activeProject.links[0].href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 transition"
+              >
+                <img src={githubIcon} alt="github" className="w-5" />
+                View Code
+              </a>
+
+              <a
+                href={activeProject.links[1].href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 transition"
+              >
+                <img src={externalLink} alt="live" className="w-5" />
+                View Live
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }
 
-// Updated with image per project
+/* ================= DATA ================= */
+
 const projects = [
   {
     title: "Jivaka: Role Based HealthCare Management System",
