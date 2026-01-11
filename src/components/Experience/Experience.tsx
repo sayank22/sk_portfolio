@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 /* =======================
    Types
 ======================= */
-interface Experience {
+interface ExperienceItem {
   id: number;
   company: string;
   role: string;
@@ -18,7 +18,7 @@ interface Experience {
 /* =======================
    Data
 ======================= */
-const experiences: Experience[] = [
+const experiences: ExperienceItem[] = [
   {
     id: 1,
     company: "MathSense Academy",
