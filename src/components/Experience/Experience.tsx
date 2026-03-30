@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 interface ExperienceItem {
   id: number;
   company: string;
+  website: string;
   role: string;
   duration: string;
   location?: string;
@@ -22,6 +23,7 @@ const experiences: ExperienceItem[] = [
   {
     id: 1,
     company: "MathSense Academy",
+    website: "https://www.linkedin.com/company/mathsense-academy/",
     role: "Full Stack Developer",
     duration: "October 2025 – Present",
     location: "Remote",
@@ -49,12 +51,14 @@ const experiences: ExperienceItem[] = [
   {
     id: 2,
     company: "Scalenow Technosolutions Pvt. Ltd.",
+    website: "https://www.linkedin.com/company/scalenow-technosolutions-private-limited/",
     role: "Full Stack Developer",
     duration: "June 2025 – October 2025",
     logo: "/images/scalenow.jpeg",
     description: [
-      "Developed a full-stack FinTech SPA using Next.js and TypeScript with secure MongoDB data storage and Google Sheets API integration for automated exports",
-      "Improved performance and UX by implementing city-based salary calculations and reducing page load time by ~15% through frontend optimizations"
+      "Architected a configurable FinTech platform with dynamic loan eligibility logic and a custom form-rendering engine to replace third-party tools, significantly improving administrative control and data capture.",
+      "Optimized application performance and mobile responsiveness, achieving a 15% reduction in page load time through frontend code-splitting and strategic asset optimization.",
+      "Developed a custom loan calculator and visual analytics suite to ensure regulatory compliance while providing transparent repayment timelines and interest insights for users."
     ],
     techStack: [
       "Next.js",
@@ -83,7 +87,7 @@ const cardVariant = {
 const Experience = () => {
   return (
     <section id="experience" className="py-24 px-4 flex justify-center">
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-6xl">
         <h2 className="text-4xl font-bold text-center mb-20 text-sky-400">
           Experience
         </h2>
@@ -94,9 +98,9 @@ const Experience = () => {
             <motion.div
               key={exp.id}
               variants={cardVariant}
-              initial="hidden"
-              whileInView="visible"
-              transition={{ duration: 0.6, delay: index * 0.15 }}
+              initial={{ height: 0 }}
+              whileInView={{ height: '100%' }}
+              transition={{ duration: 1.5, ease: 'easeInOut' }}
               viewport={{ once: true }}
               className="mb-20 ml-8 relative"
             >
@@ -105,25 +109,26 @@ const Experience = () => {
 
               {/* Card */}
               <div className="bg-[#0f172a] rounded-2xl p-6 md:p-8 shadow-xl border border-sky-900/40 hover:border-sky-500/40 transition">
-                {/* Header */}
-                <div className="flex items-center gap-6">
+                {/* Header */} 
+                <div className="flex  items-center gap-6">
+                  <a href={exp.website} target="_blank" rel="noopener noreferrer" className="flex items-center gap-6 cursor-pointer hover:scale-105 transition-transform">     
                   <img
                     src={exp.logo}
                     alt={exp.company}
-                    className="w-20 h-20 object-contain rounded-md bg-white/5 p-2"
+                    className="w-32 h-32 object-contain rounded-md bg-white/5 p-2"
                   />
-                  <div>
+                  <div> 
                     <h3 className="text-2xl font-semibold text-white">
                       {exp.company}
                     </h3>
                     <p className="text-lg text-sky-400">
                       {exp.role}
-                    
                     <span className="ml-2 text-sm text-gray-400">
                       {exp.duration}
                     </span>
                     </p>
                   </div>
+                  </a>
                 </div>
 
                 {/* Description */}
@@ -141,7 +146,7 @@ const Experience = () => {
                   {exp.techStack.map((tech, i) => (
                     <span
                       key={i}
-                      className="text-xs px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 tracking-wide"
+                      className="text-base px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 tracking-wide hover:bg-sky-500/20 hover:text-sky-400 transition-all cursor-pointer"
                     >
                       {tech}
                     </span>
