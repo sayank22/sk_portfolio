@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 // Project images
 import CodeGeneratorImg from "../../assets/CodeGenerator.png";
 import jivakaImg from "../../assets/jivaka.png";
+import docAIImg from "../../assets/docAI.png";
 import budgetImg from "../../assets/budgetbuddy.png";
 import dropboxImg from "../../assets/dropbox.png";
 import snapshowImg from "../../assets/snapshows.png";
@@ -156,6 +157,17 @@ const projects = [
     links: [
       { href: "https://github.com/sayank22/Jivaka", icon: githubIcon },
       { href: "https://jivaka-sayankundu.vercel.app", icon: externalLink },
+    ],
+  },
+  {
+    title: "DocAI: AI-driven CRM assistant",
+    description:
+      "DocAI is an AI-driven assistant that captures, analyzes, and updates HCP interaction data through natural language.",
+    tech: ["Python", "FastAPI", "Supabase", "Postgres", "Redux", "Typescript", "React"],
+    image: docAIImg,
+    links: [
+      { href: "https://github.com/sayank22/DocAI", icon: githubIcon },
+      { href: "https://doc-ai-sayan-kundu-eta.vercel.app", icon: externalLink },
     ],
   },
   {

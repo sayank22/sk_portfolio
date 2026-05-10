@@ -263,11 +263,11 @@ export function Main() {
           }
         }}
       />
-      <Hero></Hero>
-      <About></About>
+      <Hero />
+      <About />
       <Experience />
-      <Project></Project>
-      <Contact></Contact>
+      <Project />
+      <Contact />
     </Container>
   );
 }
