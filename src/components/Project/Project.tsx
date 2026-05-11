@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // Project images
 import CodeGeneratorImg from "../../assets/CodeGenerator.png";
 import jivakaImg from "../../assets/jivaka.png";
-import docAIImg from "../../assets/DocAI.png";
+import docAIImg from "../../assets/docai.png";
 import budgetImg from "../../assets/budgetbuddy.png";
 import dropboxImg from "../../assets/dropbox.png";
 import snapshowImg from "../../assets/snapshows.png";
